@@ -28,12 +28,10 @@ function newRecentMistakesFirstSorter (): CardOrganizer {
     const resB = b.getResults();
     const lastA = resA[resA.length - 1];
     const lastB = resB[resB.length - 1];
-
-    // Зөв хариулсныг ард нь, алдсаныг урд нь
     if (lastA === false && lastB !== false) return -1;
     if (lastA !== false && lastB === false) return 1;
 
-    return 0; // Хоёулаа алдсан бол reverse хийсэн дарааллаа (7, 6, 5...) хадгална
+    return 0; 
   });
 }
   }
