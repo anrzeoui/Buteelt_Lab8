@@ -18,8 +18,24 @@ function newRecentMistakesFirstSorter (): CardOrganizer {
      * @return The ordered cards.
      */
     reorganize: function (cards: CardStatus[]): CardStatus[] {
-      return []
-    }
+  // 1. Массивыг эхлээд урвуу харуулна (Reverse)
+  // Ингэснээр хамгийн сүүлд хариулсан 7, 6, 5... гэсэн дараалалтай болно.
+  const reversedCards = cards.slice().reverse();
+
+  // 2. Одоо эрэмбэлэлтээ хийнэ
+  return reversedCards.sort((a, b) => {
+    const resA = a.getResults();
+    const resB = b.getResults();
+    const lastA = resA[resA.length - 1];
+    const lastB = resB[resB.length - 1];
+
+    // Зөв хариулсныг ард нь, алдсаныг урд нь
+    if (lastA === false && lastB !== false) return -1;
+    if (lastA !== false && lastB === false) return 1;
+
+    return 0; // Хоёулаа алдсан бол reverse хийсэн дарааллаа (7, 6, 5...) хадгална
+  });
+}
   }
 };
 
